@@ -5,12 +5,22 @@ commonLabels:
   deployment: stable
 
 resources:
-- mysql-pv.yaml
+- pv.yaml
 - mysql-pvc.yaml
 - mysql-deploy.yaml
 - mysql-svc.yaml
+- wordpress-pvc.yaml
+- wordpress-deploy.yaml
+- wordpress-svc.yaml
+# - wordpress-ingress.yaml
 
 secretGenerator:
 - name: mysql-env-secret
   literals:
   - MYSQL_ROOT_PASSWORD=passwd
+
+configMapGenerator:
+- name: mysql-config
+  files:
+  - mysql-charset.cnf
+  - mysql-auth.cnf

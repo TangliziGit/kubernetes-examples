@@ -25,7 +25,17 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
+        - name: config
+          mountPath: /etc/mysql/conf.d
       volumes:
       - name: data
         persistentVolumeClaim:
           claimName: mysql-pvc
+      - name: config
+        configMap:
+          name: mysql-config
+          items:
+          - key: mysql-charset.cnf
+            path: charset.cnf
+          - key: mysql-auth.cnf
+            path: auth.cnf
