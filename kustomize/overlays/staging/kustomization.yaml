@@ -1,7 +1,7 @@
 namePrefix: staging-
 commonLabels:
   variant: staging
-bases:
+resources:
 - ../../base
 
 # modify base configurations
