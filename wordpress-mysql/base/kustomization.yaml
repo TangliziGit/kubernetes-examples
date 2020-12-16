@@ -1,0 +1,16 @@
+commonLabels:
+  app: wordpress-mysql
+  env: base
+  version: v1
+  deployment: stable
+
+resources:
+- mysql-pv.yaml
+- mysql-pvc.yaml
+- mysql-deploy.yaml
+- mysql-svc.yaml
+
+secretGenerator:
+- name: mysql-env-secret
+  literals:
+  - MYSQL_ROOT_PASSWORD=passwd
