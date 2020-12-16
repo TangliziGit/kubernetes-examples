@@ -5,3 +5,6 @@ configMapGenerator:
 - name: redis-config
   files:
   - my-redis.conf
+- name: redis-env
+  literals:
+  - MASTER=true

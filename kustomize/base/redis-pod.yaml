@@ -6,8 +6,12 @@ metadata:
     app: redis
 spec:
   containers:
-  - image: redis:6.0
-    name: redis
+  - name: redis
+    image: redis:6.0
+    envFrom:
+    - configMapRef:
+        name: redis-env
+    args: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
     resources: 
       limits:
         cpu: 0.1
