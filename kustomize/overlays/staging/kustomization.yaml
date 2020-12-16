@@ -1,0 +1,16 @@
+namePrefix: staging-
+commonLabels:
+  variant: staging
+bases:
+- ../../base
+
+# modify base configurations
+patches:
+- path: redis-pod-patch.yaml
+  target:
+    kind: Pod
+    name: redis
+
+# add items to base configurations
+patchesStrategicMerge:
+- redis-pod_add_env.yaml

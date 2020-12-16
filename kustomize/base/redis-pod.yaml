@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  containers:
+  - image: redis:6.0
+    name: redis
+    resources: 
+      limits:
+        cpu: 0.1
+    ports:
+    - name: redis
+      containerPort: 6379
+    volumeMounts:
+    - name: data
+      mountPath: /data
+    - name: config
+      mountPath: /usr/local/etc/redis
+  volumes:
+  - name: data
+    emptyDir: {}
+  - name: config
+    configMap:
+      name: redis-config
+      items:
+      - key: my-redis.conf
+        path: redis.conf

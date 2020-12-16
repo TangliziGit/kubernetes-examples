@@ -1,0 +1,11 @@
+- op: replace
+  path: /spec/containers/0/ports/0/containerPort
+  value: 16379
+- op: replace
+  path: /spec/containers/0/resources
+  value: {}
+- op: add
+  path: /spec/containers/0/ports/1
+  value: 
+    name: http
+    containerPort: 8080
