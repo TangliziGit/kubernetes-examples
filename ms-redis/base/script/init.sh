@@ -4,4 +4,3 @@ if [[ $index -eq 0 ]]; then
 else
   cp /tmp/redis-slave.conf /usr/local/etc/redis/redis.conf
 fi
-exit 0
