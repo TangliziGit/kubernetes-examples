@@ -12,7 +12,7 @@ resources:
 - wordpress-pvc.yaml
 - wordpress-deploy.yaml
 - wordpress-svc.yaml
-# - wordpress-ingress.yaml
+- wordpress-ingress.yaml
 
 secretGenerator:
 - name: mysql-env-secret
