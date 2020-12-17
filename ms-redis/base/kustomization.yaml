@@ -1,0 +1,19 @@
+commonLabels:
+  app: ms-redis
+  env: base
+  version: v1
+  deployment: stable
+
+resources:
+- redis-pv.yaml
+- redis-sts.yaml
+- redis-svc.yaml
+
+configMapGenerator:
+- name: redis-config
+  files:
+  - config/redis-master.conf
+  - config/redis-slave.conf
+- name: init-scripts
+  files:
+  - script/init.sh

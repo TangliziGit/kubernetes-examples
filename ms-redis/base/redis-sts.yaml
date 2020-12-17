@@ -1,0 +1,62 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: ms-redis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-redis 
+  serviceName: ms-redis
+  template:
+    metadata:
+      name: ms-redis
+      labels:
+        app: ms-redis 
+    spec:
+      initContainers:
+      - name: init-ms
+        image: busybox:latest
+        command: [ "sh", "/scripts/init.sh" ]
+        volumeMounts:
+        - name: redis-config
+          mountPath: /usr/local/etc/redis
+        - name: config
+          mountPath: /tmp
+        - name: init-scripts
+          mountPath: /scripts
+      containers:
+      - name: redis
+        image: redis
+        # command: [ "sleep", "infinity" ]
+        args: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+        ports:
+        - name: redis
+          containerPort: 6379
+        volumeMounts:
+        - name: redis-config
+          mountPath: /usr/local/etc/redis
+        - name: redis-pvc
+          mountPath: /data
+      volumes:
+      - name: redis-config
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: redis-config
+      - name: init-scripts
+        configMap:
+          name: init-scripts
+          items:
+          - key: init.sh
+            path: init.sh
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-pvc
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: redis-storage
+      resources:
+        requests:
+          storage: 1Gi

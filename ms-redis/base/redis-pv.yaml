@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ms-redis-0
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: redis-storage
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /tmp/data/redis/0
+    server: 192.168.1.4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ms-redis-1
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: redis-storage
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /tmp/data/redis/1
+    server: 192.168.1.4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ms-redis-2
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: redis-storage
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /tmp/data/redis/2
+    server: 192.168.1.4
