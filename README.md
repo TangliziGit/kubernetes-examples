@@ -10,7 +10,7 @@ Kustomize is a native configuration management.
 
 It introduces a template-free way to customize application configuration that simplifies the use of off-the-shelf applications.
 
-`/kustomize` shows how to use it for base and overly configuration management.
+`/kustomize` shows how to use it for base and overlay configuration management.
 
 
 ### Wordpress with MySQL
